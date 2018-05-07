@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Serminar
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Nga
+Implementation-Vendor-Id: DemoJ2EE
+Build-Jdk: 1.8.0_151
+Implementation-URL: https://platform.spring.io/platform/Serminar/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

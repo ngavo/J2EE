@@ -19,7 +19,7 @@ public class TheLoaiServiceImpl implements TheLoaiService {
 	@Override
 	public void addTheLoai(TheLoai theLoai) {
 		// TODO Auto-generated method stub
-		
+		theLoaiDAO.addTheLoai(theLoai);
 	}
 
 	@Override
@@ -31,19 +31,19 @@ public class TheLoaiServiceImpl implements TheLoaiService {
 	@Override
 	public void deleteTheLoai(int ID) {
 		// TODO Auto-generated method stub
-		
+		theLoaiDAO.deleteTheLoai(ID);
 	}
 
 	@Override
 	public TheLoai updateTheLoai(TheLoai theLoai) {
 		// TODO Auto-generated method stub
-		return null;
+		return theLoaiDAO.updateTheLoai(theLoai);
 	}
 
 	@Override
 	public TheLoai getTheLoai(int ID) {
 		// TODO Auto-generated method stub
-		return null;
+		return theLoaiDAO.getTheLoai(ID);
 	}
 
 }

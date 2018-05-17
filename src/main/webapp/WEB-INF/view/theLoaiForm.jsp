@@ -13,7 +13,7 @@
     <br>
     <div style="margin: 0 1em">
     	<div align= center>
-    		<a href="newEmployee" class="btn btn-primary btn-sm">Them the loai</a>
+    		<a href="newTheLoai" class="btn btn-primary btn-sm">Them the loai</a>
     	</div>
     	<br>
     	<table class="table table-bordered">
@@ -27,8 +27,8 @@
                     <td>${theLoai.id}</td>
                     <td>${theLoai.getTenTheLoai()}</td>
                     <td>
-                    	<a href="editEmployee?id=${theLoai.id}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="deleteEmployee?id=${theLoai.id}" class="btn btn-primary btn-sm">Delete</a>
+                    	<a href="editTheLoai?id=${theLoai.id}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="deleteTheLoai?id=${theLoai.id}" class="btn btn-primary btn-sm">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

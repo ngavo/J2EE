@@ -18,7 +18,7 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="<c:url value='/assets/js/demo.js' />" ></script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
     	$(document).ready(function(){
 			console.log("fjgdfghdfugihd");
         	demo.initChartist();
@@ -33,4 +33,4 @@
             });
 
     	});
-	</script>
+	</script> -->

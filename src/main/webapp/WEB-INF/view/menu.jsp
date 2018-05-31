@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="wrapper">
 		<div class="sidebar" data-color="purple" data-image="<c:url value='/assets/img/sidebar-5.jpg' />" >
 				<div class="sidebar-wrapper">
@@ -9,45 +10,45 @@
 	
 	            <ul class="nav">
 	                <li class="active">
-	                    <a href="dashboard.html">
+	                    <a href="/Serminar/listTacGia">
 	                        <i class="pe-7s-graph"></i>
-	                        <p>Dashboard</p>
+	                        <p>Tác Giả</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="user.html">
+	                    <a href="/Serminar/theLoai">
 	                        <i class="pe-7s-user"></i>
-	                        <p>User Profile</p>
+	                        <p>Thể Loại</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="table.html">
+	                    <a href="/Serminar/listSach">
 	                        <i class="pe-7s-note2"></i>
-	                        <p>Table List</p>
+	                        <p>Sách</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="typography.html">
+	                    <a href="/Serminar/NXB">
 	                        <i class="pe-7s-news-paper"></i>
-	                        <p>Typography</p>
+	                        <p>Nhà Xuất Bản</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="icons.html">
+	                    <a href="/Serminar/KhachHang">
 	                        <i class="pe-7s-science"></i>
-	                        <p>Icons</p>
+	                        <p>Khách Hàng</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="maps.html">
+	                    <a href="/Serminar/hoadonnhap/home">
 	                        <i class="pe-7s-map-marker"></i>
-	                        <p>Maps</p>
+	                        <p>Hóa Đơn Nhập</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="notifications.html">
+	                    <a href="/Serminar/hoadonxuat/home">
 	                        <i class="pe-7s-bell"></i>
-	                        <p>Notifications</p>
+	                        <p>Hóa Đơn Xuất</p>
 	                    </a>
 	                </li>
 					<li class="active-pro">

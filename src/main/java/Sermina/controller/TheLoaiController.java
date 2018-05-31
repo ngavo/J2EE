@@ -1,15 +1,19 @@
 package Sermina.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import Sermina.model.TheLoai;
@@ -26,7 +30,17 @@ public class TheLoaiController {
         model.addObject("listTheLoai", listTheLoai);
         model.setViewName("theLoaiForm");
         return model;
-    }    
+    }   
+    
+    @RequestMapping(value="/theloaijson", method= RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<TheLoai>> listTheLoaiJson()
+    {
+    	List<TheLoai> listTheLoai = theLoaiService.getAllTheLoai();
+    	Collections.reverse(listTheLoai);
+    	
+    	return new ResponseEntity<List<TheLoai>>(listTheLoai, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/newTheLoai", method = RequestMethod.GET)
     public ModelAndView newTheLoai(ModelAndView model) {

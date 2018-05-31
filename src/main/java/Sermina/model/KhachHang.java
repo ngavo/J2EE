@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="khachhang")
 public class KhachHang implements Serializable {
@@ -38,7 +40,8 @@ public class KhachHang implements Serializable {
 	@Column(name="sodienthoai")
 	private String SoDienThoai;
 	
-	@OneToMany(mappedBy="khachhang", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="khachhang",cascade= CascadeType.REMOVE)
+	@JsonBackReference
 	private List<HoaDonXuat> hoadonxuat = new ArrayList<HoaDonXuat>();
 
 	public List<HoaDonXuat> getHoadonxuat() {

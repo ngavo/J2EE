@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="sach")
@@ -29,6 +34,14 @@ public class Sach implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	public List<HoaDonXuat_Sach> getHdxSach() {
+		return hdxSach;
+	}
+
+	public void setHdxSach(List<HoaDonXuat_Sach> hdxSach) {
+		this.hdxSach = hdxSach;
+	}
+
 	@Column(name="tensach")
 	private String TenSach;
 	
@@ -38,8 +51,20 @@ public class Sach implements Serializable {
 	@Column(name="giaban")
 	private Long GiaBan;
 	
+	@Column(name="soluong")
+	private Long SoLuong;
 	
 	
+	
+	
+	public Long getSoLuong() {
+		return SoLuong;
+	}
+
+	public void setSoLuong(Long soLuong) {
+		SoLuong = soLuong;
+	}
+
 	public Long getGiaNhap() {
 		return GiaNhap;
 	}
@@ -56,50 +81,48 @@ public class Sach implements Serializable {
 		GiaBan = giaBan;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_nhaxuatban")
+	@JsonManagedReference
 	private NhaXuatBan nhaxuatban;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_theloai")
+	@JsonManagedReference
 	private TheLoai theloai;
 	
-	@ManyToMany(mappedBy="sach")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+			name="tacgia_sach",
+			joinColumns= @JoinColumn(name="sach_id"),
+			inverseJoinColumns = @JoinColumn(name="tacgia_id")
+			)
+	@JsonManagedReference
 	private List<TacGia> tacgia = new ArrayList<TacGia>();
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name="sach_chitiethoadonnhap",
-			joinColumns= @JoinColumn(name="sach_id"),
-			inverseJoinColumns = @JoinColumn(name="chitiethoadonnhap_id")
-			)
-	private List<ChiTietHoaDonNhap> chitiethoadonnhap = new ArrayList<ChiTietHoaDonNhap>();
+	
+	@OneToMany(mappedBy="sach",fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@JsonManagedReference
+	private List<HoaDonNhap_Sach> hdnSach = new ArrayList<HoaDonNhap_Sach>();
 	
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name="sach_chitiethoadonxuat",
-			joinColumns=@JoinColumn(name="sach_id"),
-			inverseJoinColumns = @JoinColumn(name="chitiethoadonxuat_id")
-			)
-	private List<ChiTietHoaDonXuat> chitiethoadonxuat = new ArrayList<ChiTietHoaDonXuat>();
 	
 	
-	public List<ChiTietHoaDonNhap> getChitiethoadonnhap() {
-		return chitiethoadonnhap;
+	public List<HoaDonNhap_Sach> getHdnSach() {
+		return hdnSach;
 	}
 
-	public void setChitiethoadonnhap(List<ChiTietHoaDonNhap> chitiethoadonnhap) {
-		this.chitiethoadonnhap = chitiethoadonnhap;
+	public void setHdnSach(List<HoaDonNhap_Sach> hdnSach) {
+		this.hdnSach = hdnSach;
 	}
 
-	public List<ChiTietHoaDonXuat> getChitiethoadonxuat() {
-		return chitiethoadonxuat;
-	}
-
-	public void setChitiethoadonxuat(List<ChiTietHoaDonXuat> chitiethoadonxuat) {
-		this.chitiethoadonxuat = chitiethoadonxuat;
-	}
+	
+	
+	
+	@OneToMany(mappedBy="sach",fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@JsonBackReference
+	private List<HoaDonXuat_Sach> hdxSach = new ArrayList<HoaDonXuat_Sach>();
+	
 
 	public List<TacGia> getTacgia() {
 		return tacgia;

@@ -2,6 +2,9 @@ package Sermina.model;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,12 +36,21 @@ public class TacGia implements Serializable {
 	@Column(name="tentacgia")
 	private String TenTacGia;
 	
-	@ManyToMany(cascade= CascadeType.ALL)
-	@JoinTable(
-			name="tacgia_sach",
-			joinColumns= @JoinColumn(name="tacgia_id"),
-			inverseJoinColumns = @JoinColumn(name="sach_id")
-			)
+	@Column(name="mota")
+	private String MoTa;
+	
+	
+	
+	public String getMoTa() {
+		return MoTa;
+	}
+
+	public void setMoTa(String moTa) {
+		MoTa = moTa;
+	}
+
+	@ManyToMany(mappedBy="tacgia",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@JsonBackReference
 	List<Sach> sach = new ArrayList<Sach>();
 	
 	

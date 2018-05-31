@@ -1,22 +1,23 @@
 package Sermina.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name="chitiethoadonxuat")
-public class ChiTietHoaDonXuat implements Serializable {
+@Table(name="hoadonxuat_sach")
+public class HoaDonXuat_Sach implements Serializable {
 
 	/**
 	 * 
@@ -27,15 +28,19 @@ public class ChiTietHoaDonXuat implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="soluongxuat")
-	private int SoLuongXuat; //so luong xuat cua 1 quyen sach
-	
-	@OneToOne
-	@JoinColumn(name="id_hoadonxuat")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idhdx")
+	@JsonManagedReference
 	private HoaDonXuat hoadonxuat;
 	
-	@ManyToMany(mappedBy="chitiethoadonxuat")
-	private List<Sach> sach = new ArrayList<Sach>();
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idsach")
+	@JsonManagedReference
+	private Sach sach;
+	
+	@Column(name="soluong")
+	private Long SoLuong;
 
 	public int getId() {
 		return id;
@@ -43,14 +48,6 @@ public class ChiTietHoaDonXuat implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getSoLuongXuat() {
-		return SoLuongXuat;
-	}
-
-	public void setSoLuongXuat(int soLuongXuat) {
-		SoLuongXuat = soLuongXuat;
 	}
 
 	public HoaDonXuat getHoadonxuat() {
@@ -61,12 +58,20 @@ public class ChiTietHoaDonXuat implements Serializable {
 		this.hoadonxuat = hoadonxuat;
 	}
 
-	public List<Sach> getSach() {
+	public Sach getSach() {
 		return sach;
 	}
 
-	public void setSach(List<Sach> sach) {
+	public void setSach(Sach sach) {
 		this.sach = sach;
+	}
+
+	public Long getSoLuong() {
+		return SoLuong;
+	}
+
+	public void setSoLuong(Long soLuong) {
+		SoLuong = soLuong;
 	}
 	
 	

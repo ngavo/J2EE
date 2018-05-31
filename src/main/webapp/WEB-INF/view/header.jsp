@@ -30,6 +30,13 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="<c:url value='/assets/css/pe-icon-7-stroke.css' />"  rel="stylesheet" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.common.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.light.css" /> -->
+	<!-- A DevExtreme library -->
+	<link href="<c:url value='https://cdn3.devexpress.com/jslib/18.1.3/css/dx.common.css' />" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='https://cdn3.devexpress.com/jslib/18.1.3/css/dx.light.css' />" rel="stylesheet" type="text/css" />
+	<script  src="<c:url value='https://cdn3.devexpress.com/jslib/18.1.3/js/dx.all.js' />" ></script>
     
 </head>

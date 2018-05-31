@@ -71,6 +71,14 @@
                   <artifactId>hibernate-jpamodelgen</artifactId>  
                   <scope>compile</scope>  
              </dependency>
+             <dependency>
+	            <groupId>com.fasterxml.jackson.core</groupId>
+	            <artifactId>jackson-databind</artifactId>
+	        </dependency>
+	        <dependency>
+	        	<groupId>com.google.code.gson</groupId>
+	        	<artifactId>gson</artifactId>
+	        </dependency>
              
 		 	
     </dependencies>

@@ -7,11 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="nhaxuatban")
@@ -39,11 +43,13 @@ public class NhaXuatBan implements Serializable {
 	private String Email;
 
 	
-	@OneToMany(mappedBy="nhaxuatban", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="nhaxuatban",fetch = FetchType.LAZY,cascade= CascadeType.REMOVE)
+	@JsonBackReference
 	private List<Sach> sachs = new ArrayList<Sach>();
 	
 	
-	@OneToMany(mappedBy="nhaxuatban", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="nhaxuatban", cascade= CascadeType.REMOVE)
+	@JsonBackReference
 	private List<HoaDonNhap> hoadonhap = new ArrayList<HoaDonNhap>();
 	
 	

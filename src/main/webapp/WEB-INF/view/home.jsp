@@ -6,27 +6,25 @@ pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-
-<div align="center">
-	<h1>QUẢN LÝ KHO SÁCH</h1>  <br>
-</div>
-<div align="right">
-	<div>
-	<h3>Nhóm 4 : </h3>
-	<ul>
-		<li><h4>Văn Hông Hà - 1452</h4></li>
-		<li><h4>Võ Thị Thúy Nga - 1452</h4></li>
-		<li><h4>Huỳnh Lê Anh Tú - 1452</h4></li>
-		<li><h4>Phạm Văn Tùng - 1352</h4></li>
-	</ul>
+<div>
+	<div align="center">
+		<h1>QUẢN LÝ KHO SÁCH</h1>
+		<h3>GVHD: Ths.Huỳnh Ngọc Tín</h3>
+	</div>
 	
-</div> 
+	<div >
+		<div style="float:right;margin-right:32em;">
+			<h3>Nhóm 4 : </h3>
+			<ul>
+				<li><h4>Văn Hông Hà - 1452</h4></li>
+				<li><h4>Võ Thị Thúy Nga - 1452</h4></li>
+				<li><h4>Huỳnh Lê Anh Tú - 1452</h4></li>
+				<li><h4>Phạm Văn Tùng - 1352</h4></li>
+			</ul>
+			
+		</div> 
+	</div>
 </div>
-
-    <br>
-    <div style="margin: 0 1em">
-    	
- 	
 	<jsp:include page="HaiTheDiv.jsp"></jsp:include>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>

@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
     </div>
  	
  	 
- 	 <div id="idGridSach" style="width:80%; margin:auto;"></div>
+ 	 <div id="idGridSach" style="width:100%; margin:auto;"></div>
  	 
 	<jsp:include page="HaiTheDiv.jsp"></jsp:include>
 </body>
@@ -40,25 +40,52 @@ pageEncoding="UTF-8"%>
 						filterRow:{
 							visible: true
 							},
+							onRowPrepared: function (info) {
+			                    if (info.rowType != "header") {
+			                        if (info.rowIndex % 2 == 0)
+			                            info.rowElement.css("background-color", "aliceblue");
+			                    }
+			                    else {
+			                        info.rowElement.css("font-weight", "bold" );
+			                    }
+			                },
+			                onCellPrepared: function(e) {
+			                    if (e.rowType == "header") {
+			                        e.cellElement.css("text-align", "center");
+			                    }
+			                    
+			                },
 						columns:[
 							{
 								caption:"id",
 								dataField: "id",
 								allowFiltering: false,
-								width: "60px"
+								width: "60px",
+								visible: false 
+								
 							},
 							{
+		                        caption: "STT",
+		                        cellTemplate: function (container, options) {
+		                            container.append($('<div >' + parseInt(parseInt(options.rowIndex) + 1) + '</div>'));
+		                        },
+		                        width: "50px",
+		                        alignment: 'center'
+		                    },
+							{
 								caption: "Tên Sách",
-								dataField: "tenSach"
+								dataField: "tenSach",
 								
 							},
 							{
 								caption: "Giá Nhập",
-								dataField: "giaNhap"
+								dataField: "giaNhap",
+								width: "100px"
 							},
 							{
 								caption: "Giá Bán",
-								dataField: "giaBan"
+								dataField: "giaBan",
+								width: "100px"
 							},
 							{
 								caption: "Tên Nhà Xuất Bản",

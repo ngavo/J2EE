@@ -33,12 +33,36 @@ pageEncoding="UTF-8"%>
 						filterRow:{
 							visible: true
 							},
+							onRowPrepared: function (info) {
+			                    if (info.rowType != "header") {
+			                        if (info.rowIndex % 2 == 0)
+			                            info.rowElement.css("background-color", "aliceblue");
+			                    }
+			                    else {
+			                        info.rowElement.css("font-weight", "bold" );
+			                    }
+			                },
+			                onCellPrepared: function(e) {
+			                    if (e.rowType == "header") {
+			                        e.cellElement.css("text-align", "center");
+			                    }
+			                    
+			                },
 						columns:[
 							{
 								caption:"id",
 								dataField: "id",
-								allowFiltering: false
+								allowFiltering: false,
+								visible: false
 							},
+							{
+		                        caption: "STT",
+		                        cellTemplate: function (container, options) {
+		                            container.append($('<div >' + parseInt(parseInt(options.rowIndex) + 1) + '</div>'));
+		                        },
+		                        width: "50px",
+		                        alignment: 'center'
+		                    },
 							{
 								caption: "Tên Sách",
 								dataField: "tenSach"

@@ -138,7 +138,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Serminar/logout">
                                 <p>Log out</p>
                             </a>
                         </li>

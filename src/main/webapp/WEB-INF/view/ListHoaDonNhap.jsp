@@ -62,9 +62,11 @@ function loadData()
 						caption: "Action",
 						allowFiltering: false,
 						cellTemplate: function (container, options) {
-							$('<div><a href="../hoadonnhap/edit?id='+ options.data.id+'" >Edit</a></div>')
+							$('<a class="btn btn-primary btn-sm" href="../hoadonnhap/edit?id='+ options.data.id+'" >Edit</a>')
 		                       .appendTo(container);
-							$('<div><a href="../hoadonnhap/delete?id='+ options.data.id+'" >Delete</a></div>')
+							$('<a class="btn btn-primary btn-sm" href="../hoadonnhap/delete?id='+ options.data.id+'" >Delete</a>')
+		                       .appendTo(container);
+							$('<a class="btn btn-primary btn-sm" href="../hoadonnhap/chitiet?id='+ options.data.id+'" >Chi Tiết</a>')
 		                       .appendTo(container);
 						}
 					}

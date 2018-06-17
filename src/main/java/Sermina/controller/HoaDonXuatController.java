@@ -1,5 +1,6 @@
 package Sermina.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,9 @@ import Sermina.dao.HoaDonXuatDAOJpa;
 import Sermina.dao.HoaDonXuatSachJpa;
 import Sermina.dao.KhachHangDAOJpa;
 import Sermina.dao.SachDAOJpa;
+import Sermina.dto.GetHoaDonXuatChiTietDto;
 import Sermina.dto.GetInsetHoaDonXuat;
+import Sermina.dto.GetSachChoChiTietHoaDonXuat;
 import Sermina.dto.GetSachForNewHDX;
 import Sermina.dto.GetSachKhacHangDaMua;
 import Sermina.model.HoaDonXuat;
@@ -212,6 +215,36 @@ public class HoaDonXuatController {
 		int id = Integer.parseInt(request.getParameter("id"));
 		hoadonxuatJpa.delete(id);
 		return "ListHoaDonXuat";
+	}
+	
+	
+	@RequestMapping(value="/hoadonxuat/chitiet", method=RequestMethod.GET)
+	public ModelAndView chitietHoaDonXuat(ModelAndView model,HttpServletRequest request)
+	{
+		int id = Integer.parseInt(request.getParameter("id"));
+		HoaDonXuat hdx = hoadonxuatJpa.findOne(id);
+		
+		GetHoaDonXuatChiTietDto result = new GetHoaDonXuatChiTietDto();
+		
+		result.setTenKhachHang(hdx.getKhachhang().getHoTen());
+		result.setNgayBan(hdx.getNgayBan());
+		result.setTongTien(hdx.getTongTien());
+		
+		List<GetSachKhacHangDaMua> sachs = hdxService.SachKhachHangDaMua(id);
+		
+		List<GetSachChoChiTietHoaDonXuat> getSachChiTiet = new ArrayList<GetSachChoChiTietHoaDonXuat>();
+		for (GetSachKhacHangDaMua getSachKhacHangDaMua : sachs) {
+			Sach sc = sachjpa.findOne(getSachKhacHangDaMua.getIdSach());
+			GetSachChoChiTietHoaDonXuat sct = new GetSachChoChiTietHoaDonXuat();
+			sct.setTenSach(sc.getTenSach());
+			sct.setSoLuong(getSachKhacHangDaMua.getSoLuong());
+			getSachChiTiet.add(sct);
+		}
+		result.setGetSach(getSachChiTiet);
+		model.addObject("hoadonxuat", result);
+		
+		model.setViewName("ChiTietHoaDonXuat");
+		return model;
 	}
 	
 

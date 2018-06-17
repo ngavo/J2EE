@@ -8,12 +8,12 @@ pageEncoding="UTF-8"%>
 <jsp:include page="menu.jsp"></jsp:include>
 
 <div align="center">
-	<h1>The loai sach</h1>   
+	<h2>Danh sách Thể Loại Sách</h2>   
     </div>
     <br>
     <div style="margin: 0 1em">
     	<div align= center>
-    		<a href="newTheLoai" class="btn btn-primary btn-sm">Them the loai</a>
+    		<a href="newTheLoai" class="btn btn-primary btn-sm">Thêm thể loại</a>
     	</div>
     	<br>
     	<%-- <table class="table table-bordered">

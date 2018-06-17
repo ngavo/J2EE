@@ -1,6 +1,7 @@
 package Sermina.service;
 
 import Sermina.dao.GetDataForFinHoaDonNhapSachForEdit;
+import Sermina.dto.GetSachForHomeSach;
 import Sermina.model.NhaXuatBan;
 import Sermina.model.Sach;
 import Sermina.model.TheLoai;
@@ -19,5 +20,6 @@ public interface SachService {
 	public List<Sach> findSachWothIdNXB(int nxb);
 	public List<GetDataForFinHoaDonNhapSachForEdit> finHoaDonNhapSachForEdit(int id);
 	public void DeleteHoaDonNhapSachWithIdHDn(int id);
+	public List<GetSachForHomeSach> listSachHomeSach();
 
 }

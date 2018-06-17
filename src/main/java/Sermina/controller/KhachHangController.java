@@ -1,15 +1,19 @@
 package Sermina.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import Sermina.model.KhachHang;
@@ -28,6 +32,17 @@ public class KhachHangController {
         model.addObject("listKhachHang", listKhachHang);
         model.setViewName("KhachHangForm");
         return model;
+    }
+    
+    
+    @RequestMapping(value="/listKhachHangJson")
+    @ResponseBody
+    public ResponseEntity<List<KhachHang>> listKhachHangJson()
+    {
+    	 List<KhachHang> listKhachHang = khachHangService.getAllKhachHang();
+    	 Collections.reverse(listKhachHang);
+    	 
+    	 return new ResponseEntity<List<KhachHang>>(listKhachHang, HttpStatus.OK);
     }
  
     @RequestMapping(value = "/newKhachHang", method = RequestMethod.GET)
@@ -61,6 +76,16 @@ public class KhachHangController {
         int ID = Integer.parseInt(request.getParameter("id"));
         KhachHang KhachHang = khachHangService.getKhachHang(ID);
         ModelAndView model = new ModelAndView("ThemKhachHangForm");
+        model.addObject("KhachHang", KhachHang);
+ 
+        return model;
+    }
+    
+    @RequestMapping(value = "/chitietKhachHang", method = RequestMethod.GET)
+    public ModelAndView chitietKhachHang(HttpServletRequest request) {
+        int ID = Integer.parseInt(request.getParameter("id"));
+        KhachHang KhachHang = khachHangService.getKhachHang(ID);
+        ModelAndView model = new ModelAndView("ChiTietKhachHang");
         model.addObject("KhachHang", KhachHang);
  
         return model;

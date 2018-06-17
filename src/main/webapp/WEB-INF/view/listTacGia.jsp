@@ -19,24 +19,7 @@ pageEncoding="UTF-8"%>
     		<a href="newTacGia" class="btn btn-primary btn-sm">Tạo Mới</a>
     	</div>
     	<br>
-    	<%-- <table class="table table-bordered">
- 			<tr>
-	            <th>Tên Tác Giả</th>
-	            <th>Mô Tả</th>
-	            <th>Action</th>
- 			</tr>
-            <c:forEach var="tacgia" items="${listTacGia}">
-                <tr>
- 
-                    <td>${tacgia.getTenTacGia()}</td>
-                    <td>${tacgia.getMoTa()}</td>
-                    <td>
-                    	<a href="editTacGia?id=${tacgia.id}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="deleteTacGia?id=${tacgia.id}" class="btn btn-primary btn-sm">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table> --%>
+    	
     </div>
     
     <div id="idTacGia"></div>
@@ -77,6 +60,7 @@ pageEncoding="UTF-8"%>
 
 								$('<a class="btn btn-primary btn-sm" href="editTacGia?id='+options.data.id+'" >Edit</a>').appendTo(container);
 								$('<a class="btn btn-primary btn-sm" href="deleteTacGia?id='+options.data.id+'" >Delete</a>').appendTo(container);
+								$('<a class="btn btn-primary btn-sm" href="chiTietTacGia?id='+options.data.id+'" >Chi Tiết</a>').appendTo(container);
 								
 								}
 						}

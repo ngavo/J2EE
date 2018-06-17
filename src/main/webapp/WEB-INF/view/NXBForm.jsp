@@ -8,12 +8,12 @@ pageEncoding="UTF-8"%>
 <jsp:include page="menu.jsp"></jsp:include>
 
 <div align="center">
-	<h1>Nha xuat ban</h1>   
+	<h3>Danh sách Nhà Xuất Bản</h3>   
     </div>
     <br>
     <div style="margin: 0 1em">
     	<div align= center>
-    		<a href="newNXB" class="btn btn-primary btn-sm">Them nha xuat ban</a>
+    		<a href="newNXB" class="btn btn-primary btn-sm">Thêm mới Nhà Xuất Bản</a>
     	</div>
     	<br>
     	<%-- <table class="table table-bordered">
@@ -86,6 +86,7 @@ pageEncoding="UTF-8"%>
 
 								$('<a class="btn btn-primary btn-sm" href="editNXB?id='+options.data.id+'" >Edit</a>').appendTo(container);
 								$('<a class="btn btn-primary btn-sm" href="deleteNXB?id='+options.data.id+'" >Delete</a>').appendTo(container);
+								$('<a class="btn btn-primary btn-sm" href="chitietNXB?id='+options.data.id+'" >Chi Tiết</a>').appendTo(container);
 								
 								}
 						}

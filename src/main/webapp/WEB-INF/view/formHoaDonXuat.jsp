@@ -10,16 +10,27 @@ pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-
+<br>
+<a href="../hoadonxuat/home" class="btn btn-default col-sm-offset-1" role="button">Trở về</a>
+<br>
 <div align="center">
 	<form:form modelAttribute="hoadonxuat">
 		<form:hidden path="id" id="idHoaDonXuat"/>
 	</form:form>
-	<h1>Thêm Hóa Đơn Xuất</h1>   
+	<h3 id="idTieuDe">Thêm Hóa Đơn Xuất</h3>   
     <br>
-    <div id="idLoadKhachHang" style="width: 50%; margin: auto;"></div>
-    <div id="idTableSach"></div>
-    <button onClick="save()">Save</button>
+    <div class="form-group">
+    	<label for="idLoadKhachHang" class="control-label col-sm-2">Khách Hàng:</label>
+    	<div id="idLoadKhachHang" class="col-sm-8"></div>
+    </div>
+    <div class="form-group" >
+    	<div id="idTableSach" class="col-sm-offset-1 col-sm-10"></div>
+    </div>
+    <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10" style="padding-top: 10px;padding-bottom: 10px;">
+	    	<button onClick="save()" class="btn btn-primary">Lưu</button>
+	    </div>
+    </div>
 </div>
  	
 	<jsp:include page="HaiTheDiv.jsp"></jsp:include>
@@ -29,7 +40,14 @@ pageEncoding="UTF-8"%>
 var YesOrNo;
 		$(document).ready(function () {
 			YesOrNo = $("#idHoaDonXuat").val();
-
+			if(YesOrNo!=0)
+			{
+				$("#idTieuDe").html("Chỉnh sửa Hóa Đơn Xuất");
+			}
+			else
+			{
+			$("#idTieuDe").html("Thêm mới Hóa Đơn Xuất");
+			}
 			LoadKhachHang();
 			LoadSach()
 		});

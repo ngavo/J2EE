@@ -1,6 +1,5 @@
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%> --%>
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -11,37 +10,58 @@ pageEncoding="UTF-8"%>
 <body>
  
 <jsp:include page="menu.jsp"></jsp:include>
-
+<br>
+<a href="./listSach" class="btn btn-default col-sm-offset-1" role="button">Trở về</a>
+<br>
 <div align="center">
-	<h1 >Thêm Sách</h1>   
+	<h3 id="idTieuDe"></h3>   
     </div>
     <br>
     
-    <form:form modelAttribute="sach">
+    <form:form modelAttribute="sach" class="form-horizontal col-sm-10 col-sm-offset-1">
+    
     	<form:hidden path="id" id="idSach"/>
-    	<div class="form-group " style="width: 60%;margin: auto;">
-    	  <label for="NameSach" class="col-sm-2 col-form-label">Tên Sách:</label>
-	      <!-- <input type="text" class="col-sm-4 form-control" id="NameSach"  path="TenSach"/> -->
-	      <form:input path="TenSach" class="col-sm-4 form-control" id="NameSach"/>
-	    </div>
-	    <div class="form-group " style="width: 60%;margin: auto;">
-    	  <label for="GiaSachNhap" class="col-sm-2 col-form-label">Giá Nhập:</label>
-	      <!-- <input type="text" class="col-sm-4 form-control" id="GiaSachNhap" path="GiaNhap" /> -->
-	      <form:input class="col-sm-4 form-control" id="GiaSachNhap" path="GiaNhap"/>
-	    </div>
-	    <div class="form-group " style="width: 60%;margin: auto;">
-    	  <label for="GiaSachBan" class="col-sm-2 col-form-label">Giá Bán:</label>
-	      <!-- <input type="text" class="col-sm-4 form-control" id="GiaBanSach" path="GiaBan" /> -->
-	      <form:input class="col-sm-4 form-control" id="GiaBanSach" path="GiaBan"/>
-	    </div>
-    	<div class="form-group " style="width: 60%;margin: auto;">
-    	  <label for="idselecNXB" class="col-sm-2 col-form-label">Nhà Xuất Bản:</label>
-	      <div id="idselecNXB" class="col-sm-4 form-control"></div>
+    	
+    	<div class="form-group " >
+    	  <label for="NameSach" class="control-label col-sm-2">Tên Sách:</label>
+	      <div class="col-sm-10">
+	      	<form:input path="TenSach" class="form-control" id="NameSach"/>
+	      </div>
 	    </div>
 	    
-	    <div class="form-group" style="width: 60%;margin: auto;">
-	    	<label for="idselecTheLoai" class="col-sm-2 col-form-label">Thể loại:</label>
-	      <div id="idselecTheLoai" class="col-sm-4 form-control"></div>
+	    
+	    <div class="form-group " >
+    	  <label for="GiaSachNhap" class="control-label col-sm-2">Giá Nhập:</label>
+	      <div class="col-sm-10">
+	      	<form:input class="form-control" id="GiaSachNhap" path="GiaNhap"/>
+	      </div>
+	    </div>
+	    
+	    
+	    
+	    <div class="form-group " >
+    	  <label for="GiaSachBan" class="control-label col-sm-2">Giá Bán:</label>
+	      <!-- <input type="text" class="col-sm-4 form-control" id="GiaBanSach" path="GiaBan" /> -->
+	      <div class="col-sm-10">
+	      	<form:input class="form-control" id="GiaBanSach" path="GiaBan"/>
+	      </div>
+	    </div>
+	    
+	    
+    	<div class="form-group " >
+    	  <label for="idselecNXB" class="control-label col-sm-2">Nhà Xuất Bản:</label>
+    	  
+    	  <div class="col-sm-10">
+	      	<div id="idselecNXB" class="col-sm-4 form-control"></div>
+	      </div>
+	      
+	    </div>
+	    
+	    <div class="form-group" >
+	    	<label for="idselecTheLoai" class="control-label col-sm-2">Thể loại:</label>
+	    	<div class="col-sm-10">
+	      		<div id="idselecTheLoai" class="col-sm-4 form-control"></div>
+	      	</div>
 	    </div>
 	    
 	    
@@ -55,8 +75,10 @@ pageEncoding="UTF-8"%>
 	</div>
 	<br>
 	
-	<div  class="form-group" style="width: 80%;margin: auto;">
-    	<button onClick="Save()" >Lưu</button>
+	<div  class="form-group" >
+		<div class="col-sm-offset-2 col-sm-10" style="padding-top: 10px;padding-bottom: 10px;">
+    	<button onClick="Save()" class="btn btn-primary">Lưu</button>
+    	</div>
     </div>
       
       
@@ -72,6 +94,14 @@ var YesOrNoId;
 	$(document).ready(function(){
 
 		YesOrNoId =  $("#idSach").val();
+		if(YesOrNoId!=0)
+		{
+			$("#idTieuDe").html("Chỉnh sửa Sách");
+		}
+		else
+		{
+			$("#idTieuDe").html("Thêm mới Sách");
+		}
 		loadNXB();
 
 		loadTheLoai();
@@ -177,11 +207,15 @@ var YesOrNoId;
 		                            info.rowElement.css("background-color", "aliceblue");
 		                    }
 		                },
+		                filterRow:{
+							visible: true
+							},
 
 		                columns:[
 			                {
 			                	caption: "id",
-				                dataField: "id"
+				                dataField: "id",
+				                allowFiltering: false
 				             },
 				             {
 				                	caption: "Tên tác giả",

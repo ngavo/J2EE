@@ -29,8 +29,10 @@ import Sermina.dao.HoaDonNhapSachDAOJpa;
 import Sermina.dao.SachDAOJpa;
 import Sermina.dto.GatDataSachOfNXB;
 import Sermina.dto.GetDataForDataGridNewSach;
+import Sermina.dto.GetHoaDonNhapChiTietDto;
 import Sermina.dto.GetInsertHoaDonNhap;
 import Sermina.dto.GetInsertSach;
+import Sermina.dto.GetSachChoChiTietHoaDonXuat;
 import Sermina.model.HoaDonNhap;
 import Sermina.model.HoaDonNhap_Sach;
 import Sermina.model.NhaXuatBan;
@@ -247,7 +249,37 @@ public class HoaDonNhapConTroller {
 	}
 	
 	
-	
+	@RequestMapping(value="/hoadonnhap/chitiet", method=RequestMethod.GET)
+	public ModelAndView chitietHoaDonNhap(ModelAndView model, HttpServletRequest request)
+	{
+		int id = Integer.parseInt(request.getParameter("id"));
+		HoaDonNhap hdn = hdnResponsitory.findOne(id);
+		
+		GetHoaDonNhapChiTietDto result = new GetHoaDonNhapChiTietDto();
+		result.setTenNhaXuatBan(hdn.getNhaxuatban().getTenNhaXuatBan());
+		result.setNgayNhap(hdn.getNgayNhap());
+		result.setTongTien(hdn.getTongTien());
+		
+		
+		List<GetSachChoChiTietHoaDonXuat> sachhdn = new ArrayList<GetSachChoChiTietHoaDonXuat>();
+		List<GetDataForFinHoaDonNhapSachForEdit> hoadonnhapsach = sachService.finHoaDonNhapSachForEdit(Integer.parseInt(request.getParameter("id")));
+		
+		
+		for (GetDataForFinHoaDonNhapSachForEdit getDataForFinHoaDonNhapSachForEdit : hoadonnhapsach) {
+			GetSachChoChiTietHoaDonXuat sct = new GetSachChoChiTietHoaDonXuat();
+			Sach s = sachResponsitory.findOne(getDataForFinHoaDonNhapSachForEdit.getIdSach());
+			sct.setTenSach(s.getTenSach());
+			sct.setSoLuong(getDataForFinHoaDonNhapSachForEdit.getSoLuong());
+			
+			sachhdn.add(sct);
+		}
+		
+		result.setGetSachHDN(sachhdn);
+		
+		model.addObject("hoadonnhap",result);
+		model.setViewName("ChiTietHoaDonNhap");
+		return model;
+	}
 	
 	
 

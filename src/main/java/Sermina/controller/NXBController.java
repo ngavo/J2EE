@@ -82,4 +82,14 @@ public class NXBController {
         
         return model;
     }
+    
+    @RequestMapping(value = "/chitietNXB", method = RequestMethod.GET)
+    public ModelAndView chitietNXB(HttpServletRequest request) {
+        int ID = Integer.parseInt(request.getParameter("id"));
+        NhaXuatBan NXB = nxbService.getNXB(ID);
+        ModelAndView model = new ModelAndView("ChiTietNhaXuatBan");
+        model.addObject("NXB", NXB);
+        
+        return model;
+    }
 }

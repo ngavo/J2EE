@@ -1,6 +1,7 @@
 package Sermina.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 
+import Sermina.dao.NhaXuatBanJpa;
 import Sermina.dao.SachDAOJpa;
+import Sermina.dao.TheLoaiJpa;
+import Sermina.dto.GetChiTietSach;
 import Sermina.dto.GetInsertSach;
 import Sermina.dto.GetListSachDeGuiDuLieuJson;
+import Sermina.dto.GetSachForHomeSach;
 import Sermina.model.NhaXuatBan;
 import Sermina.model.Sach;
 import Sermina.model.TacGia;
@@ -38,6 +43,7 @@ import Sermina.service.NXBService;
 import Sermina.service.SachService;
 import Sermina.service.TacGiaService;
 import Sermina.service.TheLoaiService;
+import Sermina.service.TonKhoService;
 
 @Controller
 public class SachController {
@@ -55,8 +61,16 @@ public class SachController {
 	private TheLoaiService tloaiService;
 	
 	@Autowired
+	private TheLoaiJpa theloaiJpa;
+	
+	@Autowired
 	private SachDAOJpa sjpa;
 	
+	@Autowired
+	private NhaXuatBanJpa nxbJps;
+	
+	@Autowired
+	private TonKhoService tonkoService;
 	
 	@RequestMapping(value="/listSach", method = RequestMethod.GET)
 	public ModelAndView getListSach(ModelAndView model)
@@ -70,16 +84,18 @@ public class SachController {
 	
 	@RequestMapping(value="/listSachm", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<List<Sach>> getListSachdatafgdjk()
+	public ResponseEntity<List<GetSachForHomeSach>> getListSachdatafgdjk()
 	{
+		List<GetSachForHomeSach> lstSachForHome = new ArrayList<GetSachForHomeSach>();
 		
-		return new ResponseEntity<List<Sach>>(sachService.listSach(), HttpStatus.OK);
+		
+		return new ResponseEntity<List<GetSachForHomeSach>>(sachService.listSachHomeSach(), HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(value="/listSach/dataOfSach", method = RequestMethod.GET,produces = { MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<List<GetListSachDeGuiDuLieuJson>> getListSachdata()
+	/*public ResponseEntity<List<GetListSachDeGuiDuLieuJson>> getListSachdata()
 	{
 		List<Sach> sachs = sachService.listSach();
 		List<GetListSachDeGuiDuLieuJson> results = new ArrayList<GetListSachDeGuiDuLieuJson>();
@@ -96,6 +112,12 @@ public class SachController {
 		
 		
 		return new ResponseEntity<List<GetListSachDeGuiDuLieuJson>>(results, HttpStatus.OK);
+	}*/
+	public ResponseEntity<List<GetSachForHomeSach>> getListSachdata()
+	{
+		
+		
+		return new ResponseEntity<List<GetSachForHomeSach>>(sachService.listSachHomeSach(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="newSach", method = RequestMethod.GET)
@@ -247,6 +269,32 @@ public class SachController {
 		}
 		
 		return new ResponseEntity<List<Integer>>(idTacgia, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value="/chiTietSach", method= RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView  getTacGiaTest(ModelAndView model ,HttpServletRequest request)
+	{
+		int id = Integer.parseInt(request.getParameter("id"));
+		Sach sach = sachService.findSach(id);
+		
+		GetChiTietSach chitietsach = new GetChiTietSach();
+		chitietsach.setId(sach.getId());
+		chitietsach.setTenSach(sach.getTenSach());
+		chitietsach.setGiaBan(sach.getGiaBan());
+		chitietsach.setGiaNhap(sach.getGiaNhap());
+		chitietsach.setTenTacGia(sach.getTacgia());
+		NhaXuatBan nxb = nxbJps.findOne(tonkoService.GetTenNhaXuatBanSach(sach.getId()));
+		chitietsach.setTenNhaXuatBan(nxb.getTenNhaXuatBan());
+		TheLoai theloai = theloaiJpa.findOne(tonkoService.GetTenTheLoai(sach.getId()));
+		chitietsach.setTenTheLoai(theloai.getTenTheLoai());
+		
+		model.addObject("getchitietsach", chitietsach);
+		model.setViewName("ChiTietSach");
+		
+		
+		return model;
 	}
 
 }

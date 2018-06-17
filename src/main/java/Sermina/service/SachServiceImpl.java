@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Sermina.dao.GetDataForFinHoaDonNhapSachForEdit;
 import Sermina.dao.SachDAO;
+import Sermina.dto.GetSachForHomeSach;
 import Sermina.model.NhaXuatBan;
 import Sermina.model.Sach;
 import Sermina.model.TheLoai;
@@ -89,6 +90,13 @@ public class SachServiceImpl implements SachService {
 	public void DeleteHoaDonNhapSachWithIdHDn(int id)
 	{
 		sachDAO.DeleteHoaDonNhapSachWithIdHDn(id);
+	}
+	
+	@Override
+	@Transactional
+	public List<GetSachForHomeSach> listSachHomeSach()
+	{
+		return sachDAO.listSachHomeSach();
 	}
 
 }

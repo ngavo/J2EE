@@ -64,7 +64,7 @@ public class TheLoaiController {
     public ModelAndView deleteTheLoai(HttpServletRequest request) {
         int ID = Integer.parseInt(request.getParameter("id"));
         theLoaiService.deleteTheLoai(ID);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/theLoai");
     }
     
 

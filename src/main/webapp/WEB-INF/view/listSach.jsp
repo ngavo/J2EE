@@ -1,5 +1,6 @@
 <%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%> --%>
+    <%@page session="false"%>
     <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
@@ -19,37 +20,6 @@ pageEncoding="UTF-8"%>
     		<a href="newSach" class="btn btn-primary btn-sm">Tạo Mới</a>
     	</div>
     	<br>
-    	<%-- <table class="table table-bordered">
- 			<tr>
- 				<th>id</th>
-	            <th>Tên Sách</th>
-	            <th>Nhà xuất bản</th>
-	            <th>Thể loại</th>
-	            <th>Giá bán</th>
-	            <th>Giá nhập</th>
-	            <th>Tác giả</th>
-	            <th>Hoạt động</th>
- 			</tr>
-            <c:forEach var="sach" items="${listSach}">
-                <tr>
- 					<td>${sach.id}</td>
-                    <td>${sach.getTenSach()}</td>
-                    <td>${sach.getNhaxuatban().getTenNhaXuatBan()}</td>
-                    <td>${sach.getTheloai().getTenTheLoai() }</td>
-                    <td>${sach.getGiaNhap() }</td>
-                    <td>${sach.getGiaBan()}</td>
-                    <td>
-                    	<c:forEach var="tacgia" items="${sach.getTacgia() }">
-                    		<p> - ${tacgia.getTenTacGia() }</p>
-                    	</c:forEach>
-                    </td>
-                    <td>
-                    	<a href="editSach?id=${sach.id}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="deleteSach?id=${sach.id}" class="btn btn-primary btn-sm">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table> --%>
     </div>
  	
  	 
@@ -74,7 +44,8 @@ pageEncoding="UTF-8"%>
 							{
 								caption:"id",
 								dataField: "id",
-								allowFiltering: false
+								allowFiltering: false,
+								width: "60px"
 							},
 							{
 								caption: "Tên Sách",
@@ -90,10 +61,15 @@ pageEncoding="UTF-8"%>
 								dataField: "giaBan"
 							},
 							{
+								caption: "Tên Nhà Xuất Bản",
+								dataField: "tenNhaXuatBan"
+							},
+							{
 								cellTemplate: function(container, options){
 
 									$('<a class="btn btn-primary btn-sm" href="editSach?id='+options.data.id+'" >Edit</a>').appendTo(container);
 									$('<a class="btn btn-primary btn-sm" href="deleteSach?id='+options.data.id+'" >Delete</a>').appendTo(container);
+									$('<a class="btn btn-primary btn-sm" href="chiTietSach?id='+options.data.id+'" >Chi Tiết</a>').appendTo(container);
 									
 									}
 							}

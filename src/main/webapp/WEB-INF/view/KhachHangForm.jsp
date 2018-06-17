@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
     		<a href="newKhachHang" class="btn btn-primary btn-sm">Thêm khách hàng</a>
     	</div>
     	<br>
-    	<table class="table table-bordered">
+    	<%-- <table class="table table-bordered">
  			<tr>
 	            <th>Name</th>
 	            <th>Email</th>
@@ -37,10 +37,65 @@ pageEncoding="UTF-8"%>
                     </td>
                 </tr>
             </c:forEach>
-        </table>
+        </table> --%>
     </div>
+    
+    <div id="idKhachHang"></div>
  	
 	<jsp:include page="HaiTheDiv.jsp"></jsp:include>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>
+<script type="text/javascript">
+	$(document).ready(function () {
+		
+		$.ajax({
+			url:"./listKhachHangJson",
+			contentType: 'application/json; charset=utf-8',
+			success: function (data) {
+				$("#idKhachHang").dxDataGrid({
+					dataSource: data,
+					filterRow:{
+						visible: true
+						},
+					columns:[
+						{
+							caption:"id",
+							dataField: "id",
+							allowFiltering: false
+						},
+						{
+							caption: "Tên Khách Hàng",
+							dataField: "hoTen"
+							
+						},
+						{
+							caption: "Số Điện Thoại",
+							dataField: "soDienThoai"
+						},
+						{
+							caption: "Địa Chỉ",
+							dataField: "diaChi"
+						},
+						{
+							caption: "Email",
+							dataField: "email"
+						},
+						{
+							cellTemplate: function(container, options){
+
+								$('<a class="btn btn-primary btn-sm" href="editKhachHang?id='+options.data.id+'" >Edit</a>').appendTo(container);
+								$('<a class="btn btn-primary btn-sm" href="deleteKhachHang?id='+options.data.id+'" >Delete</a>').appendTo(container);
+								$('<a class="btn btn-primary btn-sm" href="chitietKhachHang?id='+options.data.id+'" >Chi Tiết</a>').appendTo(container);
+								
+								}
+						}
+						]
+					});	
+				
+			}
+				
+			});
+			
+	})
+</script>
 </html>

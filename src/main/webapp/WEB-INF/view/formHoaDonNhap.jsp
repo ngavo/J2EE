@@ -10,17 +10,30 @@ pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
-
+<br>
+<a href="../hoadonnhap/home" class="btn btn-default col-sm-offset-1" role="button">Trở về</a>
+<br>
 <div align="center">
 	<form:form modelAttribute="hoadonnhap">
 		<form:hidden path="id" id="idHoaDonNhap"/>
 	</form:form>
-	<h1>Thêm Hóa Đơn Nhập</h1>   
+	<h3 id="idTieuDe">Thêm Hóa Đơn Nhập</h3>   
     <br>
-    <div id="idLoadNhaXuatBan" style="width: 50%; margin: auto;"></div>
-    <button onClick="FindSach()">Tìm</button>
-    <div id="idTableSachOfNXB"></div>
-    <button onClick="save()">Save</button>
+    <div class="form-group">
+    	<label for="idLoadNhaXuatBan" class="control-label col-sm-2">Nhà Xuất Bản:</label>
+    	<div id="idLoadNhaXuatBan" class="col-sm-8"></div>
+    	<div class="col-sm-2">
+    		<button onClick="FindSach()" class="btn btn-primary" >Tìm</button>
+    	</div>
+    </div>
+    <div class="form-group" >
+    	<div id="idTableSachOfNXB" class="col-sm-offset-1 col-sm-10"></div>
+    </div>
+    <div class="form-group">
+    	<div class="col-sm-offset-2 col-sm-10" style="padding-top: 10px;padding-bottom: 10px;">
+    	<button onClick="save()" class="btn btn-primary">Save</button>
+    	</div>
+    </div>
 </div>
  	
 	<jsp:include page="HaiTheDiv.jsp"></jsp:include>
@@ -30,6 +43,14 @@ pageEncoding="UTF-8"%>
 var YesOrNoId;
 	$(document).ready(function () {
 		YesOrNoId = $("#idHoaDonNhap").val();
+		if(YesOrNoId!=0)
+		{
+			$("#idTieuDe").html("Chỉnh sửa Hóa Đơn Nhập");
+		}
+		else
+		{
+		$("#idTieuDe").html("Thêm mới Hóa Đơn Nhập");
+		}
 		loadNhaXuatBan();
 
 
@@ -100,7 +121,7 @@ var YesOrNoId;
 
 	 $.ajax({
 			url: "../hoadonnhap/loadSachOfNhaXuatBan?name="+ $("#idLoadNhaXuatBan").dxAutocomplete("instance").option("value"),
-			contentType: "application/json",
+			contentType: "application/json; charset=utf-8",
 			success: function (dataSach) {
 
 				if(YesOrNoId!=0)//truong hop edit

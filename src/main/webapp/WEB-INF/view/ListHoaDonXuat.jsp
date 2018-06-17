@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
 <jsp:include page="menu.jsp"></jsp:include>
 
 <div align="center">
-	<h1>Hóa Đơn Nhập</h1>   
+	<h1>Hóa Đơn Xuất</h1>   
     <br>
     <div style="margin: 0 1em">
     	<div align= center>
@@ -62,9 +62,11 @@ function loadData()
 						caption: "Action",
 						allowFiltering: false,
 						cellTemplate: function (container, options) {
-							$('<div><a href="../hoadonxuat/edit?id='+ options.data.id+'" >Edit</a></div>')
+							$('<a class="btn btn-primary btn-sm" href="../hoadonxuat/edit?id='+ options.data.id+'" >Edit</a>')
 		                       .appendTo(container);
-							$('<div><a href="../hoadonxuat/delete?id='+ options.data.id+'" >Delete</a></div>')
+							$('<a class="btn btn-primary btn-sm" href="../hoadonxuat/delete?id='+ options.data.id+'" >Delete</a>')
+		                       .appendTo(container);
+							$('<a class="btn btn-primary btn-sm" href="../hoadonxuat/chitiet?id='+ options.data.id+'" >Chi Tiết</a>')
 		                       .appendTo(container);
 						}
 					}

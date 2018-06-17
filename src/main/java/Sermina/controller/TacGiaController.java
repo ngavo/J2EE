@@ -91,5 +91,18 @@ public class TacGiaController {
 		
 		return new ModelAndView("redirect:/listTacGia");
 	}
+	
+	
+	@RequestMapping(value="/chiTietTacGia", method = RequestMethod.GET)
+	public ModelAndView chiTietTacGia(HttpServletRequest request  )
+	{
+		int TacGiaId = Integer.parseInt(request.getParameter("id"));
+        TacGia tacgia = tacgiaService.getTacGia(TacGiaId);
+        ModelAndView model = new ModelAndView("ChiTietTacGia");
+        model.addObject("tacgia", tacgia);
+ 
+        return model;
+		
+	}
 
 }

@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import Sermina.dto.GetSachForHomeSach;
 import Sermina.dto.GetSachForNewHDX;
 import Sermina.model.NhaXuatBan;
 import Sermina.model.Sach;
@@ -32,6 +33,41 @@ public class SachDAOImpl implements SachDAO {
 	public List<Sach> listSach() {
 		// TODO Auto-generated method stub
 		List<Sach> listSach = sessionFactory.getCurrentSession().createQuery("from Sach as s order by s.id desc").list();
+		return listSach;
+	}
+	
+	@Override
+	public List<GetSachForHomeSach> listSachHomeSach()
+	{
+		
+		
+		//List<Sach> listSach = sessionFactory.getCurrentSession().createQuery("from Sach as s order by s.id desc").list();
+		Query Nha = sessionFactory.getCurrentSession().createSQLQuery("select sach.id as id, sach.tensach as tensach, sach.gianhap as gianhap, sach.giaban as giaban, nhaxuatban.tennhaxuatban from sach inner join nhaxuatban on sach.id_nhaxuatban = nhaxuatban.id order by sach.id desc");
+		
+		return LayListSachForHome(Nha.list());
+		
+	}
+	
+	public List<GetSachForHomeSach> LayListSachForHome(List listObject)
+	{
+		int lenghttObject = listObject.size();
+		
+		List<GetSachForHomeSach> listSach = new ArrayList<GetSachForHomeSach>();
+		
+		for(int i=0;i<lenghttObject;i++)
+		{
+			GetSachForHomeSach sachsoluong = new GetSachForHomeSach();
+			Object[] k =	(Object[]) listObject.get(i);
+			String n = Arrays.toString(k);
+			String sub = n.substring(1, n.length()-1);
+			String[] lisSub= sub.split(",");
+			sachsoluong.setId(Integer.parseInt(lisSub[0].trim()));
+			sachsoluong.setTenSach((lisSub[1].trim()));
+			sachsoluong.setGiaNhap(Long.parseLong(lisSub[2].trim()));
+			sachsoluong.setGiaBan(Long.parseLong(lisSub[3].trim()));
+			sachsoluong.setTenNhaXuatBan(lisSub[4].trim());
+			listSach.add(sachsoluong);
+		}
 		return listSach;
 	}
 	
